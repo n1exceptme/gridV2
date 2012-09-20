@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="http://docs.sencha.com/ext-js/4-1/extjs-build/ext-all-debug.js"></script>
 	
     <!-- Example -->
-    <script type="text/javascript" src="grid.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 	
 	<?php
 	session_start();
