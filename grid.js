@@ -10,15 +10,17 @@
  */
 Ext.Loader.setConfig({enabled: true});
 
+Ext.Loader.setPath('Ext.ux', '../ux/');
+
 Ext.application({
     name: 'ExtPOD',
 
-/*     controllers: [
-        'Contatos'
+     controllers: [
+        'ControllerForniture'
     ], 
 
-    autoCreateViewport: true
-*/
+    //autoCreateViewport: true,
+
 	launch: function(){
 		Ext.create( 'ExtPOD.view.Viewport' );
 	}

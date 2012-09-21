@@ -13,10 +13,13 @@ Ext.define('ExtPOD.store.Forniture', {
         type: 'ajax',
         api: {
         	read: 'php/elencaForniture.php',
-			// create: 'php/criaContato.php', 
-            // update: 'php/atualizaContato.php',
-            // destroy: 'php/deletaContato.php'
+			create: 'php/criaContato.php', 
+            update: 'php/atualizaContato.php',
+            destroy: 'php/deletaContato.php'
         },
+		extraParams:{
+			task: "LISTING"
+		},
         reader: {
             type: 'json',
             root: 'forniture',

@@ -1,6 +1,6 @@
 <?php
 	//chama o arquivo de conexão com o bd
-	include("conectar.php");
+	include("connetti.php");
 
 	$info = $_POST['contatos'];
 

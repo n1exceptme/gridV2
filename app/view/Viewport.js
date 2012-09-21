@@ -17,7 +17,7 @@ Ext.define('ExtPOD.view.Viewport', {
         Ext.apply(me, {
             items: [
                 {
-                    xtype: 'fornituregrid'
+                    xtype: 'FornitureGrid'
                 }
             ]
         });
