@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <title>GridV2</title>
+    <title>GridV2 - MVC</title>
     <!-- ExtJS remoto
     <link rel="stylesheet" type="text/css" href="http://docs.sencha.com/ext-js/4-1/extjs-build/resources/css/ext-all-gray.css"/>
 

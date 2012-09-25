@@ -8,32 +8,32 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
     views: ['fornitura.EditForm', 'fornitura.FornitureGrid'],
 
     refs: [{
-            ref: 'contatoPanel',
+            ref: 'fornituraPanel',
             selector: 'panel'
         },{
-            ref: 'contatoGrid',
+            ref: 'fornitureGrid',
             selector: 'grid'
         }
     ],
 
     init: function() {
         this.control({
-            'contatogrid dataview': {
-                itemdblclick: this.editarContato
+            'FornitureGrid dataview': {
+                itemdblclick: this.modificaFornitura
             },
-            'contatogrid button[action=add]': {
-            	click: this.editarContato
+            'FornitureGrid button[action=add]': {
+            	click: this.modificaFornitura
             },
-            'contatogrid button[action=delete]': {
-                click: this.deleteContato
+            'FornitureGrid button[action=delete]': {
+                click: this.eliminaFornitura
             },
-            'contatoform button[action=save]': {
-                click: this.updateContato
+            'EditForm button[action=save]': {
+                click: this.aggiornaFornitura
             }
         });
     },
 
-    editarContato: function(grid, record) {
+    modificaFornitura: function(grid, record) {
         var edit = Ext.create('ExtPOD.view.fornitura.EditForm').show();
         
         if(record){
@@ -41,41 +41,41 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
         }
     },
     
-    updateContato: function(button) {
+    aggiornaFornitura: function(button) {
         var win    = button.up('window'),
             form   = win.down('form'),
             record = form.getRecord(),
             values = form.getValues();
         
-        var novo = false;
+        var nuovo = false;
         
 		if (values.id > 0){
 			record.set(values);
 		} else{
 			record = Ext.create('ExtPOD.model.Fornitura');
 			record.set(values);
-			this.getContatosStore().add(record);
-            novo = true;
+			this.getFornitureStore().add(record);
+            nuovo = true;
 		}
         
 		win.close();
-        this.getContatosStore().sync();
+        this.getFornitureStore().sync();
 
-        if (novo){ //faz reload para atualziar
-            this.getContatosStore().load();
+        if (nuovo){ //faz reload para atualziar
+            this.getFornitureStore().load();
         }
     },
     
-    deleteContato: function(button) {
+    eliminaFornitura: function(button) {
     	
-    	var grid = this.getContatoGrid(),
+    	var grid = this.getFornitureGrid(),
     	record = grid.getSelectionModel().getSelection(), 
-        store = this.getContatosStore();
+        store = this.getFornitureStore();
 
 	    store.remove(record);
-	    this.getContatosStore().sync();
+	    this.getFornitureStore().sync();
 
         //faz reload para atualziar
-        this.getContatosStore().load();
+        this.getFornitureStore().load();
     }
 });

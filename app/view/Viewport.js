@@ -3,11 +3,11 @@
  * @extends Ext.Viewport
  */
 Ext.define('ExtPOD.view.Viewport', {
-    extend: 'Ext.Viewport',    
-    layout: 'fit',
+    extend: 'Ext.Viewport',
+	layout: 'fit',
     
     requires: [
-        'ExtPOD.view.fornitura.Grid',
+        'ExtPOD.view.fornitura.FornitureGrid',
         'ExtPOD.view.fornitura.EditForm'
     ],
     
@@ -15,10 +15,11 @@ Ext.define('ExtPOD.view.Viewport', {
         var me = this;
         
         Ext.apply(me, {
+		
             items: [
                 {
                     xtype: 'FornitureGrid'
-                }
+                }		
             ]
         });
                 

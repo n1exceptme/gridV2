@@ -5,19 +5,25 @@
 Ext.define('ExtPOD.store.Forniture', {
     extend: 'Ext.data.Store',
     model: 'ExtPOD.model.Fornitura',
-    autoLoad: true,
-    pageSize: 20,
-    autoLoad: {start: 0, limit: 20},
-    
+    pageSize: 25,
+    autoLoad: {start: 0, limit: 25},
+	remoteSort:true,
+	simpleSortMode:true,
+    sorters : {
+        property : 'pod',
+        direction : 'ASC'
+    },
+
+	
     proxy: {
         type: 'ajax',
         api: {
         	read: 'php/elencaForniture.php',
-			create: 'php/criaContato.php', 
-            update: 'php/atualizaContato.php',
-            destroy: 'php/deletaContato.php'
+			create: 'php/nuovaFornitura.php', 
+            update: 'php/aggiornaFornitura.php',
+            destroy: 'php/eliminaFornitura.php'
         },
-		extraParams:{
+ 		extraParams:{
 			task: "LISTING"
 		},
         reader: {

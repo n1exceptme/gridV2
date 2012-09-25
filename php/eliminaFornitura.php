@@ -9,7 +9,7 @@
 	$id = $data->id;
 
 	//consulta sql
-	$query = sprintf("DELETE FROM anagrafica2 WHERE id=%d",
+	$query = sprintf("DELETE FROM anagrafica3 WHERE id=%d",
 		mysql_real_escape_string($id));
 
 	$rs = mysql_query($query);

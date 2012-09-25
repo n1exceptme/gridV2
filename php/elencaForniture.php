@@ -6,18 +6,33 @@
 	$limit = $_REQUEST['limit'];
 	
 	$task = '';
+
+    if (isset($_GET['sort'])) {
+      $sorters = json_decode($_GET['sort'], false);
+      
+	  if($sorters === null){
+		$sort = $_GET['sort'];
+		$dir = isset($_GET['dir'])?$_GET['dir']:'ASC';
+		$sorters = json_decode("[{\"property\":\"$sort\", \"direction\":\"$dir\"}]", false);
+      }
+    }
 	
-	if(isset($_REQUEST['task'])) {
+	$sortField = $sorters->property;
+	$sortOrder = $sorters->direction;
+	
+  	if(isset($_REQUEST['task'])) {
 		$task = $_REQUEST['task'];
 	}
 	
 	switch($task) {
 		case "LISTING":
-			$queryString = "SELECT * FROM anagrafica2 LIMIT $start,  $limit";
+			$queryString = "SELECT * FROM anagrafica3
+							ORDER BY". " " . $sortField . " " . $sortOrder . " " . 
+							"LIMIT $start,  $limit";
 		break;
 		
 		default:
-			$queryString = "SELECT POD FROM anagrafica2 LIMIT $start,  $limit";
+			$queryString = "SELECT * FROM anagrafica3 LIMIT $start,  $limit";
 		break;
 	}
 
@@ -31,7 +46,7 @@
 	}
 
 	//rileva il "numero" di record contenuti nel db
-	$queryTotal = mysql_query('SELECT count(*) as num FROM anagrafica2') or die(mysql_error());
+	$queryTotal = mysql_query('SELECT count(*) as num FROM anagrafica3') or die(mysql_error());
 	$row = mysql_fetch_assoc($queryTotal);
 	$total = $row['num'];
 

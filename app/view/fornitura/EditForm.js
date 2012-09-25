@@ -36,93 +36,88 @@ Ext.define('ExtPOD.view.fornitura.EditForm', {
 					},    
                     {
                         xtype: 'textfield',
-                        name : 'POD',
+                        name : 'cavo',
+                        fieldLabel: 'Cavo'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name : 'pod',
                         fieldLabel: 'POD'
                     },
                     {
                         xtype: 'textfield',
-                        name : 'Particella',
+                        name : 'codice_cliente',
+                        fieldLabel: 'Codice Cliente'
+                    },					
+                    {
+                        xtype: 'textfield',
+                        name : 'particella',
                         fieldLabel: 'Particella'
                     },
                     {
                         xtype: 'textfield',
-                        name : 'Indirizzo_fornitura',
-                        fieldLabel: 'Indirizzo_fornitura'
+                        name : 'toponimo',
+                        fieldLabel: 'Toponimo'
                     },    
                     {
                         xtype: 'textfield',
-                        name : 'Ncivico',
-                        fieldLabel: 'Ncivico'
+                        name : 'ncivico',
+                        fieldLabel: 'N° Civico'
                     },
                     {
                         xtype: 'textfield',
-                        name : 'Comune',
+                        name : 'comune',
                         fieldLabel: 'Comune'
                     },    
                     {
                         xtype: 'textfield',
-                        name : 'Prov',
+                        name : 'prov',
                         fieldLabel: 'Prov'
                     },    
                     {
                         xtype: 'textfield',
-                        name : 'SiglaQuadro',
-                        fieldLabel: 'SiglaQuadro'
+                        name : 'posizione',
+                        fieldLabel: 'Posizione'
                     },    
                     {
                         xtype: 'textfield',
-                        name : 'Settore',
-                        fieldLabel: 'Settore'
+                        name : 'lettura',
+                        fieldLabel: 'Modalità<br>lettura'
                     },    
                     {
                         xtype: 'textfield',
-                        name : 'Dist',
-                        fieldLabel: 'Dist'
-                    },    
-                    {
-                        xtype: 'textfield',
-                        name : 'CodiceCliente',
-                        fieldLabel: 'CodiceCliente'
-                    },    
-                    {
-                        xtype: 'textfield',
-                        name : 'Tipo_app',
-                        fieldLabel: 'Tipo_app'
-                    },    
+                        name : 'accensione',
+                        fieldLabel: 'Modalità<br>accensione'
+                    },
                     {
                         xtype: 'numberfield',
-                        name : 'Potenza_disp',
-                        fieldLabel: 'Potenza_disp'
+                        name : 'valore_tensione',
+                        fieldLabel: 'Valore Tensione'
+                    },  					
+                    {
+                        xtype: 'textfield',
+                        name : 'consegna',
+                        fieldLabel: 'Modalità<br>consegna'
                     },    
                     {
                         xtype: 'textfield',
-                        name : 'Tipologia',
-                        fieldLabel: 'Tipologia'
+                        name : 'contatore_elettrico',
+                        fieldLabel: 'Contatore Elettrico'
                     },    
+                    {
+                        xtype: 'textfield',
+                        name : 'note',
+                        fieldLabel: 'Note'
+                    },
                     {
                         xtype: 'numberfield',
-                        name : 'ValoreTensione',
-                        fieldLabel: 'ValoreTensione'
-                    },    
-                    {
-                        xtype: 'textfield',
-                        name : 'Opzione_trasp',
-                        fieldLabel: 'Opzione_trasp'
-                    },    
+                        name : 'punti_luce',
+                        fieldLabel: 'Punti Luce'
+                    },
                     {
                         xtype: 'numberfield',
-                        name : 'Consumi_KWh',
-                        fieldLabel: 'Consumi_KWh'
-                    },    
-                    {
-                        xtype: 'textfield',
-                        name : 'Intestatario',
-                        fieldLabel: 'Intestatario'
-                    },    
-                    {
-                        xtype: 'datefield',
-                        name : 'Inizio_fornitura',
-                        fieldLabel: 'Inizio_fornitura'
+                        name : 'potenza',
+                        fieldLabel: 'Potenza'
                     }
                 ]
             }

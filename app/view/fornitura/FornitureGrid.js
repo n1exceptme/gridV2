@@ -1,22 +1,15 @@
 Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
-    extend: 'Ext.ux.LiveSearchGridPanel',
+    extend: 'Ext.grid.Panel',
     alias : 'widget.FornitureGrid',
     
-    requires: ['Ext.toolbar.Paging'],
+    requires: [
+		'Ext.toolbar.Paging'
+	],
     
     iconCls: 'icon-grid',
 
     title : 'Forniture',
     store: 'Forniture',
-
-	plugins: [
-		Ext.create('Ext.grid.plugin.RowEditing', {
-			clicksToEdit: 1,
-			autoCancel: false
-		})
-	],	
-	
-	indexes:['POD','CodiceCliente','Indirizzo_fornitura'],
 	
 	columns: [
 				{
@@ -28,87 +21,87 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 				},
 				{
 				text: 'POD', 
-				dataIndex: 'POD',   
+				dataIndex: 'pod',   
 				width:110, 
 				align:'center',
 				editor: 'textfield',
 				locked: true,
 				sortable: true
-				},			
-				{text: 'Codice Cliente', dataIndex: 'CodiceCliente',  width:80, align:'center'},						
-				{text: 'Indirizzo di fornitura', 
+				},
+				{text: 'Cavo', dataIndex: 'cavo',  width:40, align:'center', sortable: true},				
+				{text: 'Codice Cliente', dataIndex: 'codice_cliente',  width:80, align:'center', sortable: true},						
+				{text: 'Indirizzo di furnitura', 
 				 sortable: false,
-				 
-					columns: [
-								{text: 'Part.', dataIndex: 'Particella',  sortable: true, width: 50}, 
-								{text: 'Toponimo', dataIndex: 'Indirizzo_fornitura', sortable: true, width:120},
-								{text: 'Comune', dataIndex: 'Comune', sortable: true, width:70, locked: true},
-								{text: 'Prov', dataIndex: 'Prov', sortable: true, hidden: true, width:35},
-								{text: 'N.', dataIndex: 'Ncivico', sortable: true, width:40}
+				 	columns: [
+								{text: 'Part.', dataIndex: 'particella',  sortable: true, width: 70}, 
+								{text: 'Toponimo', dataIndex: 'toponimo', sortable: true, width:150},
+								{text: 'N.', dataIndex: 'ncivico', sortable: true, width:40, align:'center'},
+								{text: 'Comune', dataIndex: 'comune', sortable: true, align:'center', width:60, locked: true},
+								{text: 'Prov', dataIndex: 'prov', align:'center', sortable: true, hidden: true, width:35}
 					]
 				},
-				{text: 'Settore', dataIndex: 'Settore', hidden: true, width:120, align:'center'},
-				{text: 'Sigla<br>quadro', dataIndex: 'SiglaQuadro', hidden: true, width:50, align:'center'},
-				{text: 'Distributore', dataIndex: 'Dist', hidden: true, width:60, align:'center'},
-				{text: 'Tipo<br>apparec.', dataIndex: 'Tipo_app',  width:55, align:'center'},
-				{
-				text: 'Potenza<br>Disponibile', 
-				dataIndex: 'Potenza_disp', 
-				type: 'float', 
-				width:60, 
-				align:'right', 
-				//renderer : formatt_numeri_int
-				},
-				{text: 'Tipologia', dataIndex: 'Tipologia', width:60, align:'center' },
+				{text: 'Posizione', dataIndex: 'posizione', hidden: true, width:120, align:'center'},
+				{text: 'Modalità<br>di lettura', dataIndex: 'lettura', hidden: true, width:120, align:'center'},
+				{text: 'Modalità<br>accensione', dataIndex: 'accensione', hidden: true, width:120, align:'center'},
 				{
 				text: 'Valore<br>Tensione', 
-				dataIndex: 'ValoreTensione', 
+				dataIndex: 'valore_tensione', 
 				width:60, 
 				hidden: true, 
 				align:'center', 
 				//renderer : formatt_numeri_int
 				},
-				{text: 'Opz.<br>Trasp.', dataIndex: 'Opzione_trasp',  width:70, align:'center'},
+				{text: 'Modalità<br>consegna', dataIndex: 'consegna', hidden: true, width:120, align:'center'},				
+				{text: 'Contatore<br>elettrico', dataIndex: 'contatore_elettrico', hidden: true, width:75, align:'center'},
+				{text: 'Note', dataIndex: 'note', hidden: true, width:120, align:'center' },
+				{text: 'Punti<br>Luce', dataIndex: 'punti_luce',  width:55, align:'center', sortable: true},
 				{
-				text: 'Consumi Annui<br>(KWh)', 
-				dataIndex: 'Consumi_KWh',  
+				text: 'Potenza<br>(KWh)', 
+				dataIndex: 'potenza',  
 				type: 'float', 
-				width:80, 
+				width:70, 
 				align:'right', 
+				sortable: true
 				//renderer : formatt_numeri_float
-				},
-				{text: 'Inizio fornitura<br>merc.lib.', 
-				dataIndex: 'Inizio_fornitura',  
-				type: 'date', 
-				renderer: Ext.util.Format.dateRenderer('m/d/Y'), 
-				hidden: true, 
-				width:100,
-				align:'center'}
+				}				
 	],
 	
 	initComponent: function() {
+		this.listeners = [ {
+				sortchange: function(){
+					var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
+					grid.getStore().loadPage(1);
+				}
+				}];
+	
+	
 		
-		this.dockedItems = [{
+		this.dockedItems = [
+			{
             xtype: 'toolbar',
-            items: [{
+            items: [
+				{
                 iconCls: 'icon-save',
                 itemId: 'add',
                 text: 'Nuova',
                 action: 'add'
-            },{
+				},
+				{
                 iconCls: 'icon-delete',
                 text: 'Elimina',
                 action: 'delete'
-            }]
-        },
-        {
-            xtype: 'pagingtoolbar',
-            dock:'top',
-            store: 'Forniture',
-            displayInfo: true,
-            displayMsg: 'Forniture {0} - {1} de {2}',
-            emptyMsg: "Nessuna fornitura trovata."
-        }];
+				}
+				]
+			},
+			{
+			xtype: 'pagingtoolbar',
+			dock:'top',
+			store: 'Forniture',
+			displayInfo: true,
+			displayMsg: 'Forniture {0} - {1} de {2}',
+			emptyMsg: "Nessuna fornitura trovata."
+			}
+			];
 		
 		this.callParent(arguments);
 	}
