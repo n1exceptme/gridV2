@@ -6,29 +6,48 @@
 	$limit = $_REQUEST['limit'];
 	
 	$task = '';
-
-    if (isset($_GET['sort'])) {
-      $sorters = json_decode($_GET['sort'], false);
-      
-	  if($sorters === null){
-		$sort = $_GET['sort'];
-		$dir = isset($_GET['dir'])?$_GET['dir']:'ASC';
-		$sorters = json_decode("[{\"property\":\"$sort\", \"direction\":\"$dir\"}]", false);
-      }
-    }
 	
-	$sortField = $sorters->property;
-	$sortOrder = $sorters->direction;
+    if (isset($_GET['sort'])) {
+      $sorters = ($_GET['sort']);
+	}
+	
+    if (isset($_GET['filter'])) {
+		$filter = ($_GET['filter']);
+	}	
 	
   	if(isset($_REQUEST['task'])) {
 		$task = $_REQUEST['task'];
 	}
 	
+	
+	
 	switch($task) {
 		case "LISTING":
-			$queryString = "SELECT * FROM anagrafica3
-							ORDER BY". " " . $sortField . " " . $sortOrder . " " . 
-							"LIMIT $start,  $limit";
+			
+			$sorters = (json_decode($sorters));
+			
+			foreach ($sorters as $sort)
+				{
+					$sortField = $sort->property;
+					$sortOrder = $sort->direction;
+				};
+
+			$filtro = (json_decode($filter));
+
+			foreach ($filtro as $f)
+			{
+				$filterField = $f->property;
+				print_r($filterField);
+				$filterValue = $f->value;
+				print_r($filterValue);
+			};
+			
+			//print_r ($filtro);
+				
+
+			$queryString = "SELECT * FROM anagrafica3 WHERE $filterField ='" . $filterValue . 
+							"' ORDER BY $sortField $sortOrder 
+							LIMIT $start,  $limit";
 		break;
 		
 		default:
