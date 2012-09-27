@@ -7,7 +7,9 @@ Ext.define('ExtPOD.view.Viewport', {
 	layout: 'fit',
     
     requires: [
+		'ExtPOD.view.fornitura.Dashboard',
         'ExtPOD.view.fornitura.FornitureGrid',
+		'ExtPOD.view.fornitura.Scheda',
         'ExtPOD.view.fornitura.EditForm'
     ],
     
@@ -18,8 +20,8 @@ Ext.define('ExtPOD.view.Viewport', {
 		
             items: [
                 {
-                    xtype: 'FornitureGrid'
-                }		
+                    xtype: 'Dashboard'
+                }
             ]
         });
                 

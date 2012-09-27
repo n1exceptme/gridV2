@@ -24,6 +24,9 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
             'FornitureGrid button[action=add]': {
             	click: this.modificaFornitura
             },
+            'FornitureGrid button[action=edit]': {
+            	click: this.modificaFornitura
+            },			
             'FornitureGrid button[action=delete]': {
                 click: this.eliminaFornitura
             },

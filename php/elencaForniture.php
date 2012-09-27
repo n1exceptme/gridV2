@@ -45,8 +45,8 @@
 			//print_r ($filtro);
 				
 
-			$queryString = "SELECT * FROM anagrafica3 WHERE $filterField ='" . $filterValue . 
-							"' ORDER BY $sortField $sortOrder 
+			$queryString = "SELECT * FROM anagrafica3 
+							ORDER BY $sortField $sortOrder 
 							LIMIT $start,  $limit";
 		break;
 		

@@ -16,15 +16,15 @@ Ext.define('ExtPOD.store.Forniture', {
 
 	remoteFilter: true,
 	// Parameter name to send filtering information in
-    filter : {
-        property : 'pod',
-        value : ''
-    },
+     // filters: [{
+         // property: 'pod',
+         // value: '*' 
+     // }],
 
 	// The PHP script just use query=<whatever>
-	encodeFilters: function(filters) {
-		return filters[0].value;
-	},			
+	// encodeFilters: function(filters) {
+		// return filters[0].value;
+	// },			
 	
     proxy: {
         type: 'ajax',

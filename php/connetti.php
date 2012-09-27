@@ -1,11 +1,14 @@
 <?php
  
-$host = "127.0.0.1";
+$host = "localhost";
  
+//$user = "commessa";
 $user = "root";
  
+//$psw = "";
 $psw = "zinedine21";
- 
+
+//$db = "my_commessa";
 $db = "pod";
 
 //effettua una connessione al DBMS. in caso contrario mostra l'errore occorso 
