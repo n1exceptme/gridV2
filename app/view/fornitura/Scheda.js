@@ -1,20 +1,26 @@
 Ext.define('ExtPOD.view.fornitura.Scheda', {
 	extend: 'Ext.form.Panel',
 	alias : 'widget.Scheda',
-	
-    fieldDefaults: {
-        labelAlign: 'left',
-        msgTarget: 'side'
-    },
 
-	collapsible: true,
-	bodyPadding: 5,
-	
-	flex: 1,
 	title:'Scheda Dettagliata',
+	
+	style: 'background-color: #fff;',
+
+	iconCls: 'icon-user',
+	
+	fieldDefaults: {
+		anchor: '100%',
+		labelAlign: 'left',
+		allowBlank: false,
+		combineErrors: true,
+		msgTarget: 'side'
+	},	
+	
+	collapsible: true,
+	
+
 	defaults: {
-		width: 240,
-		labelWidth: 90,
+		padding: '5 5 5 5',
 		disabled: true
 	},
 
@@ -53,7 +59,7 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 		{
 			xtype: 'textfield',
 			name : 'ncivico',
-			fieldLabel: 'N° Civico'
+			fieldLabel: 'N. Civico'
 		},
 		{
 			xtype: 'textfield',
@@ -73,12 +79,12 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 		{
 			xtype: 'textfield',
 			name : 'lettura',
-			fieldLabel: 'Modalità<br>lettura'
+			fieldLabel: 'Modalit&agrave<br>lettura'
 		},    
 		{
 			xtype: 'textfield',
 			name : 'accensione',
-			fieldLabel: 'Modalità<br>accensione'
+			fieldLabel: 'Modalit&agrave<br>accensione'
 		},
 		{
 			xtype: 'numberfield',
@@ -88,7 +94,7 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 		{
 			xtype: 'textfield',
 			name : 'consegna',
-			fieldLabel: 'Modalità<br>consegna'
+			fieldLabel: 'Modalit&agrave<br>consegna'
 		},    
 		{
 			xtype: 'textfield',
@@ -98,7 +104,8 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 		{
 			xtype: 'textfield',
 			name : 'note',
-			fieldLabel: 'Note'
+			fieldLabel: 'Note',
+			height: 100
 		},
 		{
 			xtype: 'numberfield',

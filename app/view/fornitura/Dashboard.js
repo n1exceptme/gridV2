@@ -4,8 +4,8 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
 
 	requires: [
         'ExtPOD.view.fornitura.FornitureGrid',
-		'ExtPOD.view.fornitura.Scheda'
-		//'ExtPOD.view.chart.ConsumiBar'
+		'ExtPOD.view.fornitura.Scheda',
+		'ExtPOD.view.chart.ConsumiBar'
 	],
 
 	title: 'Anagrafica POD',
@@ -34,22 +34,24 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
         
         items: [
 			{
-			height: 500,
 			region: 'center',
         	xtype: 'FornitureGrid'
 			}, 
 			{
+			width: 300,
+			split: true,
 			region: 'east',
-            width: 300,
-            margin: '0 0 0 5',
-			xtype: 'Scheda'
+            xtype: 'Scheda'
 			}
 		]
         },
 		{
 			split: true,
+			height: 300,
+			collapsible: true,
+			layout: 'fit',
 			margin: '5 0 0 0',
-			items: [{ xtype: 'textfield'}]
+			items: [{ xtype: 'ConsumiBar'}]
 		}	
 	]
 });

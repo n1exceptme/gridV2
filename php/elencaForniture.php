@@ -43,9 +43,13 @@
 			};
 			
 			//print_r ($filtro);
-				
+			
+			$filterField = '`pod`';
+			
+			$filterValue = '*';
 
 			$queryString = "SELECT * FROM anagrafica3 
+							WHERE pod = '" . "*" . "' 
 							ORDER BY $sortField $sortOrder 
 							LIMIT $start,  $limit";
 		break;

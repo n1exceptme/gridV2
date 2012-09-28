@@ -5,12 +5,19 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 
     models: ['Fornitura'],
 
-    views: ['fornitura.EditForm', 'fornitura.FornitureGrid'],
+    views: [
+		'fornitura.EditForm', 
+		'fornitura.FornitureGrid', 
+		'fornitura.Scheda',
+		'chart.ConsumiBar'
+		],
 
-    refs: [{
+    refs: [
+		{
             ref: 'fornituraPanel',
             selector: 'panel'
-        },{
+        },
+		{
             ref: 'fornitureGrid',
             selector: 'grid'
         }

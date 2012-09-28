@@ -30,7 +30,8 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 	},
 	
 	initComponent: function() {
-		this.columns= [
+		this.columns = 
+					[
 					{
 					xtype: 'rownumberer',
 					width: 35,
@@ -163,36 +164,57 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 				{
                 iconCls: 'icon-save',
                 itemId: 'add',
-                text: 'Nuova',
+				text: 'Nuova',
+				width: 70,
+				border: 1,
+				style: {
+					borderColor: 'gray'
+					},
                 action: 'add'
-				},
+				},' ',
 				{
                 iconCls: 'icon-edit',
                 itemId: 'edit',
                 text: 'Modifica',
+				width: 70,
+				border: 1,
+				style: {
+					borderColor: 'gray'
+					},				
                 action: 'edit'
-				},
+				},' ',
 				{
                 iconCls: 'icon-delete',
                 text: 'Elimina',
-                action: 'delete'
-				},'->',
+                action: 'delete',
+				width: 70,
+				border: 1,
+				style: {
+					borderColor: 'gray'
+					},				
+				},' ',
+				{ xtype: 'tbspacer', width: 63 },				
 				{
 					fieldLabel: 'Ricerca per',
 					xtype     : 'combo',
 					store     : ['POD', 'Codice Cliente', 'Toponimo'],
-					anchor    : '75%'
+					labelAlign: 'right'
 				},				
 				{
                 xtype: 'triggerfield',
 				id: 'searchfield',
                 trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
                 trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger'				
-				},
+				},'-',
 				{
                 iconCls: 'icon-search',
                 itemId: 'search',
                 text: 'Cerca',
+				width: 70,
+				border: 1,
+				style: {
+					borderColor: 'gray'
+					},				
 				handler:function(){
 					
 					var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
@@ -209,7 +231,7 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 			},
 			{
 			xtype: 'pagingtoolbar',
-			dock:'top',
+			dock:'bottom',
 			store: 'Forniture',
 			displayInfo: true,
 			displayMsg: 'Forniture {0} - {1} de {2}',
@@ -220,26 +242,3 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 		this.callParent(arguments);
 	}
 });
-
-/*
-formatt_numeri_float: function(val) {
-	return v + '%';
-},
-
-function formatt_numeri_float(val) {
-	if (val > 0) {
-		return '<span style="color:blue;">' + val.toFixed(2) + '</span>';
-	} else if (val <= 0) {
-		return '<span style="color:red;">' + val.toFixed(2) + '</span>';
-	}
-	return val;
-};
-
-function formatt_numeri_int(val) {
-	if (val > 0) {
-		return '<span style="color:blue;">' + val + '</span>';
-	} else if (val <= 0) {
-		return '<span style="color:red;">' + val + '</span>';
-	}
-	return val;
-}; */

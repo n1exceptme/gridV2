@@ -10,7 +10,8 @@ Ext.define('ExtPOD.view.Viewport', {
 		'ExtPOD.view.fornitura.Dashboard',
         'ExtPOD.view.fornitura.FornitureGrid',
 		'ExtPOD.view.fornitura.Scheda',
-        'ExtPOD.view.fornitura.EditForm'
+        'ExtPOD.view.fornitura.EditForm',
+		'ExtPOD.view.chart.ConsumiBar'
     ],
     
     initComponent: function() {
