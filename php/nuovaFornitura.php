@@ -6,51 +6,53 @@
 
 	$data = json_decode(stripslashes($info));
 
-	$POD = $data->POD;
-	$Particella = $data->Particella;
-	$Indirizzo_fornitura = $data->Indirizzo_fornitura;
-	$Ncivico = $data->Ncivico;
-	$Comune = $data->Comune;
-	$Prov = $data->Prov;
-	$SiglaQuadro = $data->SiglaQuadro;
-	$Settore = $data->Settore;
-	$Dist = $data->Dist;
-	$CodiceCliente = $data->CodiceCliente;
-	$Tipo_app = $data->Tipo_app;
-	$Potenza_disp = $data->Potenza_disp;
-	$Tipologia = $data->Tipologia;
-	$ValoreTensione = $data->ValoreTensione;
-	$Opzione_trasp = $data->Opzione_trasp;
-	$Consumi_KWh = $data->Consumi_KWh;
-	$Intestatario = $data->Intestatario;
-	$Inizio_fornitura = $data->Inizio_fornitura;
-
+	$cavo = $data->cavo;
+	$pod = $data->pod;
+	$codice_cliente = $data->codice_cliente;
+	$particella = $data->particella;
+	$toponimo = $data->toponimo;
+	$ncivico = $data->ncivico;
+	$comune = $data->comune;
+	$prov = $data->prov;
+	$posizione = $data->posizione;
+	$lettura = $data->lettura;
+	$accensione = $data->accensione;
+	$valore_tensione = $data->valore_tensione;
+	$consegna = $data->consegna;
+	$contatore_elettrico = $data->contatore_elettrico;
+	$note = $data->note;
+	$punti_luce = $data->punti_luce;
+	$potenza = $data->potenza;
+	
 	//consulta sql
-	$query = sprintf("INSERT INTO anagrafica2 
-						(POD, Particella, Indirizzo_fornitura, Ncivico, Comune, Prov, SiglaQuadro, 
-						Settore, Dist, CodiceCliente, Tipo_app, Potenza_disp, Tipologia, ValoreTensione, 
-						Opzione_trasp, Consumi_KWh, Intestatario, Inizio_fornitura) 
+	$query = sprintf("INSERT INTO anagrafica3 
+						(
+						cavo, pod, codice_cliente, particella, toponimo, ncivico, 
+						comune, prov, posizione, lettura, accensione, valore_tensione, 
+						consegna, contatore_elettrico, note, punti_luce, potenza
+						) 
 						VALUES 
-						('%s', '%s','%s', '%s', '%s', '%s', '%s', '%s', '%s', 
-						'%s', '%s', '%d', '%s', '%d', '%s', '%d', '%s', '%s')",
-						mysql_real_escape_string($POD),	
-						mysql_real_escape_string($Particella),
-						mysql_real_escape_string($Indirizzo_fornitura),
-						mysql_real_escape_string($Ncivico),
-						mysql_real_escape_string($Comune),
-						mysql_real_escape_string($Prov),
-						mysql_real_escape_string($SiglaQuadro),
-						mysql_real_escape_string($Settore),
-						mysql_real_escape_string($Dist),
-						mysql_real_escape_string($CodiceCliente),
-						mysql_real_escape_string($Tipo_app),
-						mysql_real_escape_string($Potenza_disp),
-						mysql_real_escape_string($Tipologia),
-						mysql_real_escape_string($ValoreTensione),
-						mysql_real_escape_string($Opzione_trasp),
-						mysql_real_escape_string($Consumi_KWh),
-						mysql_real_escape_string($Intestatario),
-						mysql_real_escape_string($Inizio_fornitura));
+						(
+						'%s', '%s','%s', '%s', '%s', '%s', 
+						'%s', '%s', '%s', '%s', '%s', '%d', 
+						'%s', '%s', '%s', '%d', '%d')",
+						mysql_real_escape_string($cavo),
+						mysql_real_escape_string($pod),
+						mysql_real_escape_string($codice_cliente),
+						mysql_real_escape_string($particella),
+						mysql_real_escape_string($toponimo),
+						mysql_real_escape_string($ncivico),
+						mysql_real_escape_string($comune),
+						mysql_real_escape_string($prov),
+						mysql_real_escape_string($posizione),
+						mysql_real_escape_string($lettura),
+						mysql_real_escape_string($accensione),
+						mysql_real_escape_string($valore_tensione),
+						mysql_real_escape_string($consegna),
+						mysql_real_escape_string($contatore_elettrico),
+						mysql_real_escape_string($note),
+						mysql_real_escape_string($punti_luce),
+						mysql_real_escape_string($potenza));
 
 	$rs = mysql_query($query);
 
@@ -58,24 +60,23 @@
 		"success" => mysql_errno() == 0,
 		"forniture" => array(
 			"id" => mysql_insert_id(),
-			"POD" => $POD,
-			"Particella" => $Particella,
-			"Indirizzo_fornitura" => $Indirizzo_fornitura,
-			"Ncivico" => $Ncivico,
-			"Comune" => $Comune,
-			"Prov" => $Prov,
-			"SiglaQuadro" => $SiglaQuadro,
-			"Settore" => $Settore,
-			"Dist" => $Dist,
-			"CodiceCliente" => $CodiceCliente,
-			"Tipo_app" => $Tipo_app,
-			"Potenza_disp" => $Potenza_disp,
-			"Tipologia" => $Tipologia,
-			"ValoreTensione" => $ValoreTensione,
-			"Opzione_trasp" => $Opzione_trasp,
-			"Consumi_KWh" => $Consumi_KWh,
-			"Intestatario" => $Intestatario,
-			"Inizio_fornitura" => $Inizio_fornitura
+			"cavo" => $cavo,
+			"pod" => $pod,
+			"codice_cliente" => $codice_cliente,
+			"particella" => $particella,
+			"toponimo" => $toponimo,
+			"ncivico" => $ncivico,
+			"comune" => $comune,
+			"prov" => $prov ,
+			"posizione" => $posizione,
+			"lettura" => $lettura,
+			"accensione" => $accensione,
+			"valore_tensione" => $valore_tensione,
+			"consegna" => $consegna,
+			"contatore_elettrico" => $contatore_elettrico,
+			"note" => $note,
+			"punti_luce" => $punti_luce,
+			"potenza" => $potenza
 		)
 	));
 ?>
