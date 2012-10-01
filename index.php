@@ -16,6 +16,8 @@
 	<link rel="stylesheet" type="text/css" href="http://localhost/gridV2/resources/css/app.css">
 	<script type="text/javascript" src="http://localhost/loiane-mvc/extjs/ext-all-debug.js"></script>
 	
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	
 	
     <!-- Example -->
     <script type="text/javascript" src="grid.js"></script>

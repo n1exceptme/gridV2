@@ -37,6 +37,9 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
             'FornitureGrid button[action=delete]': {
                 click: this.eliminaFornitura
             },
+            'FornitureGrid button[action=localize]': {
+                click: this.localizzaFornitura
+            },			
             'EditForm button[action=save]': {
                 click: this.aggiornaFornitura
             }
@@ -47,6 +50,7 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
         var edit = Ext.create('ExtPOD.view.fornitura.EditForm').show();
         
         if(record){
+			alert(record.get('pod'));
         	edit.down('form').loadRecord(record);
         }
     },
@@ -87,5 +91,29 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 
         //faz reload para atualziar
         this.getFornitureStore().load();
+    },
+	
+	localizzaFornitura: function(button) {
+
+		Ext.create('Ext.window.Window', {
+                autoShow: true,
+                layout: 'fit',
+                title: 'Google Maps',
+                closeAction: 'hide',
+                width:450,
+                height:450,
+                border: false,
+                x: 40,
+                y: 60,
+                items: {
+                    xtype: 'gmappanel',
+                    center: {
+                        geoCodeAddr: '38 Via Nuova Brecce, 80147 Napoli',
+                        marker: {title: 'Sede Citelum'}
+                    }
+                }
+            });
+	
+
     }
 });

@@ -21,6 +21,7 @@ Ext.define('ExtPOD.model.Fornitura', {
 			{name: 'contatore_elettrico',type: 'string'},
 			{name: 'note',type: 'string'},
 			{name: 'punti_luce',type: 'int'},
-			{name: 'potenza',type: 'float'}
+			{name: 'potenza',type: 'float'},
+			{name: 'total', type: 'int'}
 	]
 });

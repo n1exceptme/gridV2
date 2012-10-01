@@ -3,7 +3,9 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
     alias : 'widget.FornitureGrid',
     
     requires: [
-		'Ext.toolbar.Paging'
+		'Ext.toolbar.Paging',
+		'Ext.ux.PagingToolbarResizer',
+		'Ext.ux.GMapPanel'
 	],
     
     iconCls: 'icon-grid',
@@ -184,6 +186,17 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
                 action: 'edit'
 				},' ',
 				{
+                iconCls: 'icon-maps',
+                itemId: 'maps',
+                text: 'Localizza',
+				width: 70,
+				border: 1,
+				style: {
+					borderColor: 'gray'
+					},				
+                action: 'localize'
+				},				
+				{
                 iconCls: 'icon-delete',
                 text: 'Elimina',
                 action: 'delete',
@@ -197,7 +210,7 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 				{
 					fieldLabel: 'Ricerca per',
 					xtype     : 'combo',
-					store     : ['POD', 'Codice Cliente', 'Toponimo'],
+					store     : [ ['POD','pod'], ['Codice Cliente', 'codice_cliente'], ['Toponimo','toponimo'] ],
 					labelAlign: 'right'
 				},				
 				{
@@ -234,8 +247,13 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 			dock:'bottom',
 			store: 'Forniture',
 			displayInfo: true,
-			displayMsg: 'Forniture {0} - {1} de {2}',
-			emptyMsg: "Nessuna fornitura trovata."
+			displayMsg: 'Forniture {0} - {1} di {2}',
+			emptyMsg: "Nessuna fornitura trovata.",
+			plugins : [{
+				ptype: 'pagingtoolbarresizer', 
+				options : [ 10, 20, 30, 50, 100, 200, 300 ]
+			}]			
+			
 			}
 			];
 		
