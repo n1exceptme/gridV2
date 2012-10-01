@@ -25,6 +25,26 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 
     init: function() {
         this.control({
+			'ConsumiBar': {
+                afterrender: function (chart,o) {
+                
+                    var series = chart.series.getAt(0);
+                    series.listeners = {
+                        itemmouseup: function(item) {                            
+                           
+                            var series = Ext.ComponentQuery.query('ConsumiBar')[0].series.get(0);
+                            var index = Ext.Array.indexOf(series.items, item);
+                            var selectionModel = Ext.ComponentQuery.query('FornitureGrid')[0].getSelectionModel();
+                     
+                            var selectedStoreItem = item.storeItem;
+                            selectionModel.select(index);
+                        }
+                    }
+                },
+                beforerefresh: this.beforerefresh
+            },
+			
+			
             'FornitureGrid dataview': {
                 itemdblclick: this.modificaFornitura
             },
@@ -50,7 +70,6 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
         var edit = Ext.create('ExtPOD.view.fornitura.EditForm').show();
         
         if(record){
-			alert(record.get('pod'));
         	edit.down('form').loadRecord(record);
         }
     },

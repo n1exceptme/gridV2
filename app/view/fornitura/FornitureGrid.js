@@ -1,13 +1,19 @@
+var sm = Ext.create('Ext.selection.CheckboxModel');
+
 Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
     extend: 'Ext.grid.Panel',
     alias : 'widget.FornitureGrid',
     
+	selModel: sm,
+	
     requires: [
 		'Ext.toolbar.Paging',
 		'Ext.ux.PagingToolbarResizer',
 		'Ext.ux.GMapPanel'
 	],
     
+	columnLines: true,
+	
     iconCls: 'icon-grid',
 
     title : 'Forniture',
