@@ -14,11 +14,11 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 
     refs: [
 		{
-            ref: 'fornituraPanel',
+            ref: 'Scheda',
             selector: 'panel'
         },
 		{
-            ref: 'fornitureGrid',
+            ref: 'FornitureGrid',
             selector: 'grid'
         }
     ],
@@ -27,7 +27,6 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
         this.control({
 			'ConsumiBar': {
                 afterrender: function (chart,o) {
-                
                     var series = chart.series.getAt(0);
                     series.listeners = {
                         itemmouseup: function(item) {                            
@@ -57,8 +56,11 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
             'FornitureGrid button[action=delete]': {
                 click: this.eliminaFornitura
             },
-            'FornitureGrid button[action=localize]': {
-                click: this.localizzaFornitura
+            'FornitureGrid button[action=cerca]': {
+                click: this.cercaFornitura
+            },	
+            'FornitureGrid button[action=resetsearch]': {
+                click: this.resetcercaFornitura
             },			
             'EditForm button[action=save]': {
                 click: this.aggiornaFornitura
@@ -73,6 +75,23 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
         	edit.down('form').loadRecord(record);
         }
     },
+	
+	resetcercaFornitura: function(button) {
+			var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
+			var store = grid.getStore();
+			store.clearFilter(true);
+			store.getProxy().extraParams.task = 'LISTING';
+	},
+
+	cercaFornitura: function(button) {
+			var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
+			var store = grid.getStore();
+			store.clearFilter(true);
+			var searchValue = Ext.getCmp("searchvalue").getValue();
+			var searchField = Ext.getCmp("searchfield").getValue();
+			store.getProxy().extraParams.task = 'SEARCH';
+			store.load().filter(searchField, searchValue);
+	},
     
     aggiornaFornitura: function(button) {
         var win    = button.up('window'),
@@ -95,7 +114,7 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
         this.getFornitureStore().sync();
 
         if (nuovo){ //faz reload para atualziar
-            this.getFornitureStore().load();
+            this.getStore().load();
         }
     },
     
@@ -113,8 +132,9 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
     },
 	
 	localizzaFornitura: function(button) {
-
-		Ext.create('Ext.window.Window', {
+		var mapwin;
+		if (!mapwin) {
+			mapwin = Ext.create('Ext.window.Window', {
                 autoShow: true,
                 layout: 'fit',
                 title: 'Google Maps',
@@ -132,7 +152,25 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
                     }
                 }
             });
+		}
+    },
 	
+    beforerefresh: function() {
+        var timer = false;
 
-    }
+        return function() {
+            clearTimeout(timer);
+
+            var series = Ext.ComponentQuery.query('ConsumiBar')[0].series.get(0);
+            var index = Ext.Array.indexOf(series.items, item);
+            var selectionModel = Ext.ComponentQuery.query('FornitureGrid')[0].getSelectionModel();
+            var selectedStoreItem = item.storeItem; 
+
+            if (selectedStoreItem) {
+                timer = setTimeout(function() {
+                    this.selectItem(selectedStoreItem);
+                }, 900);
+            }
+        };
+    }	
 });

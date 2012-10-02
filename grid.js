@@ -15,7 +15,7 @@ Ext.Loader.setPath('Ext.ux', '../ux/');
 Ext.application({
     name: 'ExtPOD',
 
-     controllers: [
+    controllers: [
         'ControllerForniture'
     ], 
 

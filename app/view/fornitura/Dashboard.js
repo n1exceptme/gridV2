@@ -38,7 +38,7 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
         	xtype: 'FornitureGrid'
 			}, 
 			{
-			width: 300,
+			width: 400,
 			split: true,
 			region: 'east',
             xtype: 'Scheda'

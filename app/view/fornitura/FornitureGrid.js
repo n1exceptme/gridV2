@@ -8,8 +8,7 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 	
     requires: [
 		'Ext.toolbar.Paging',
-		'Ext.ux.PagingToolbarResizer',
-		'Ext.ux.GMapPanel'
+		'Ext.ux.PagingToolbarResizer'
 	],
     
 	columnLines: true,
@@ -192,17 +191,6 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
                 action: 'edit'
 				},' ',
 				{
-                iconCls: 'icon-maps',
-                itemId: 'maps',
-                text: 'Localizza',
-				width: 70,
-				border: 1,
-				style: {
-					borderColor: 'gray'
-					},				
-                action: 'localize'
-				},				
-				{
                 iconCls: 'icon-delete',
                 text: 'Elimina',
                 action: 'delete',
@@ -211,19 +199,26 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 				style: {
 					borderColor: 'gray'
 					},				
-				},' ',
-				{ xtype: 'tbspacer', width: 63 },				
+				}
+			]
+			},
+			{
+            xtype: 'toolbar',
+            items: [			
 				{
 					fieldLabel: 'Ricerca per',
 					xtype     : 'combo',
-					store     : [ ['POD','pod'], ['Codice Cliente', 'codice_cliente'], ['Toponimo','toponimo'] ],
-					labelAlign: 'right'
-				},				
+					labelWidth: 70,
+					editable: false,
+					id: 'searchfield',
+					store     : [ ['pod','POD'], ['codice_cliente', 'Codice Cliente'], ['toponimo','Toponimo'] ],
+					labelAlign: 'left'
+				},			
 				{
-                xtype: 'triggerfield',
-				id: 'searchfield',
-                trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
-                trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger'				
+                xtype: 'textfield',
+				id: 'searchvalue'
+                //trigger1Cls: Ext.baseCSSPrefix + 'form-clear-trigger',
+                //trigger2Cls: Ext.baseCSSPrefix + 'form-search-trigger'				
 				},'-',
 				{
                 iconCls: 'icon-search',
@@ -233,18 +228,19 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 				border: 1,
 				style: {
 					borderColor: 'gray'
-					},				
-				handler:function(){
-					
-					var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
-					var store = grid.getStore();
-					store.clearFilter();
-					var searchValue = Ext.getCmp("searchfield").getValue();
-					var searchField = Ext.getCmp("searchfield").getValue();
-					store.load().filter('pod', searchValue);
-
-					}                   
-
+					},
+				action: 'cerca'
+				},'-',
+				{
+                iconCls: 'icon-search',
+                itemId: 'reset',
+                text: 'Reset',
+				width: 70,
+				border: 1,
+				style: {
+					borderColor: 'gray'
+					},
+				action: 'resetsearch'
 				}     				
 				]
 			},

@@ -2,6 +2,10 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 	extend: 'Ext.form.Panel',
 	alias : 'widget.Scheda',
 
+	requires: [
+		'Ext.ux.GMapPanel'
+	],
+	
 	title:'Scheda Dettagliata',
 	
 	style: 'background-color: #fff;',
@@ -117,5 +121,92 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 			name : 'potenza',
 			fieldLabel: 'Potenza'
 		}
-	]
+	],
+	buttons: [
+		{
+			text   : 'Load test data',
+			handler: function() {
+				this.up('form').getForm().loadRecord(Ext.create('ExtPOD.model.Fornitura', {
+					'cavo'    : 'abe@sencha.com',
+					'pod'    : 'mr',
+					'codice_cliente': 'Abraham',
+					'particella' : 'Via',
+					'toponimo': 'Nuova delle Brecce',
+					'comune'  : '80147 Napoli',
+					'ncivico'  : '38',
+					'prov'  : 'NA',
+					'valore_tensione'    : 7,
+					'potenza'  : 15
+				}));
+			}
+		},
+		{
+			text   : 'Save',
+			handler: function() {
+				var form = this.up('form').getForm(),
+					s = '';
+				
+					Ext.iterate(form.getValues(), function(key, value) {
+						s += Ext.util.Format.format("{0} = {1}<br />", key, value);
+					}, this);
+					
+					z = 'ARGH!';
+					
+					z = form.findField("pod").getValue();
+
+					Ext.Msg.alert('Form Values', z);
+				
+			}
+		},
+
+		{
+			text   : 'Reset',
+			handler: function() {
+				this.up('form').getForm().reset();
+			}
+		},
+		{
+		iconCls: 'icon-maps',
+		itemId: 'maps',
+		text: 'Localizza',
+		width: 70,
+		border: 1,
+		style: {
+			borderColor: 'gray'
+			},				
+//		action: 'localize'
+		handler: function() {
+			var form = this.up('form').getForm(),
+			indirizzo = '';
+			
+			indirizzo = form.findField("ncivico").getValue() + " ";
+			indirizzo += form.findField("particella").getValue() + " ";
+			indirizzo += form.findField("toponimo").getValue();
+			indirizzo += ", 80147 " + form.findField("comune").getValue();
+
+			//Ext.Msg.alert('Form Values', indirizzo);		
+		
+			if(form.findField("toponimo").getValue()) {
+					Ext.create('Ext.window.Window', {
+					autoShow: true,
+					layout: 'fit',
+					title: 'Google Maps',
+					closeAction: 'hide',
+					width:450,
+					height:450,
+					border: false,
+					x: 40,
+					y: 60,
+					items: {
+						xtype: 'gmappanel',
+						center: {
+							geoCodeAddr: indirizzo,
+							marker: {title: 'Sede Citelum'}
+						}
+					}
+				});
+			}
+		}
+		}		
+	]	
 });

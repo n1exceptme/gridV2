@@ -6,51 +6,47 @@
 	$limit = $_REQUEST['limit'];
 	
 	$task = '';
-	
-    if (isset($_GET['sort'])) {
-      $sorters = ($_GET['sort']);
-	}
-	
-    if (isset($_GET['filter'])) {
-		$filter = ($_GET['filter']);
-	}	
-	
+
   	if(isset($_REQUEST['task'])) {
 		$task = $_REQUEST['task'];
+	}	
+	
+    if (isset($_GET['sort'])) {
+		$sorters = ($_GET['sort']);
+		$sorters = (json_decode($sorters));
+
+		foreach ($sorters as $sort) {
+				$sortField = $sort->property;
+				$sortOrder = $sort->direction;
+		};
 	}
+	
+	if (isset($_GET['filter'])) {
+		$filter = ($_GET['filter']);
+		$filtro = (json_decode($filter));
+
+	foreach ($filtro as $f)
+	{
+		$filterField = $f->property;
+		print_r($filterField);
+		$filterValue = $f->value;
+		print_r($filterValue);
+	};
+	}	
 	
 	
 	
 	switch($task) {
 		case "LISTING":
-			
-			$sorters = (json_decode($sorters));
-			
-			foreach ($sorters as $sort)
-				{
-					$sortField = $sort->property;
-					$sortOrder = $sort->direction;
-				};
-
-			$filtro = (json_decode($filter));
-
-			foreach ($filtro as $f)
-			{
-				$filterField = $f->property;
-				print_r($filterField);
-				$filterValue = $f->value;
-				print_r($filterValue);
-			};
-			
-			//print_r ($filtro);
-			
-			$filterField = '`pod`';
-			
-			$filterValue = '*';
-
 			$queryString = "SELECT * FROM anagrafica3 
-							ORDER BY $sortField $sortOrder 
-							LIMIT $start,  $limit";
+						ORDER BY $sortField $sortOrder 
+						LIMIT $start,  $limit";
+							
+		break;
+		
+		case "SEARCH":
+			$queryString = "SELECT * FROM anagrafica3 WHERE $filterField LIKE '%".$filterValue."%'".
+							" ORDER BY $sortField $sortOrder LIMIT $start, $limit";
 		break;
 		
 		default:
