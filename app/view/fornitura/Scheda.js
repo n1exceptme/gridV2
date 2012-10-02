@@ -10,22 +10,23 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 	
 	style: 'background-color: #fff;',
 
-	iconCls: 'icon-user',
+	iconCls: 'icon-scheda',
 	
 	fieldDefaults: {
 		anchor: '100%',
 		labelAlign: 'left',
 		allowBlank: false,
 		combineErrors: true,
-		msgTarget: 'side'
+		msgTarget: 'side',
+		editable: false
 	},	
 	
 	collapsible: true,
-	
+	collapsed: true,
 
 	defaults: {
 		padding: '5 5 5 5',
-		disabled: true
+		disabled: false
 	},
 
 	items: [
@@ -124,48 +125,6 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 	],
 	buttons: [
 		{
-			text   : 'Load test data',
-			handler: function() {
-				this.up('form').getForm().loadRecord(Ext.create('ExtPOD.model.Fornitura', {
-					'cavo'    : 'abe@sencha.com',
-					'pod'    : 'mr',
-					'codice_cliente': 'Abraham',
-					'particella' : 'Via',
-					'toponimo': 'Nuova delle Brecce',
-					'comune'  : 'Napoli',
-					'ncivico'  : '38',
-					'prov'  : 'NA',
-					'valore_tensione'    : 7,
-					'potenza'  : 15
-				}));
-			}
-		},
-		{
-			text   : 'Save',
-			handler: function() {
-				var form = this.up('form').getForm(),
-					s = '';
-				
-					Ext.iterate(form.getValues(), function(key, value) {
-						s += Ext.util.Format.format("{0} = {1}<br />", key, value);
-					}, this);
-					
-					z = 'ARGH!';
-					
-					z = form.findField("pod").getValue();
-
-					Ext.Msg.alert('Form Values', z);
-				
-			}
-		},
-
-		{
-			text   : 'Reset',
-			handler: function() {
-				this.up('form').getForm().reset();
-			}
-		},
-		{
 		iconCls: 'icon-maps',
 		itemId: 'maps',
 		text: 'Localizza',
@@ -201,8 +160,15 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 						xtype: 'gmappanel',
 						center: {
 							geoCodeAddr: indirizzo,
-							marker: {title: 'Sede Citelum'+ + indirizzo}
-						}
+							marker: {
+									title: "POD: " + form.findField("pod").getValue(),
+									listeners: {
+												click: function(e){
+													Ext.Msg.alert('POD', indirizzo);
+													}
+												}
+									}
+								}
 					}
 				});
 			}

@@ -14,8 +14,8 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 
     refs: [
 		{
-            ref: 'Scheda',
-            selector: 'panel'
+            ref: 'scheda',
+            selector: 'form'
         },
 		{
             ref: 'FornitureGrid',
@@ -25,6 +25,7 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 
     init: function() {
         this.control({
+		
 			'ConsumiBar': {
                 afterrender: function (chart,o) {
                     var series = chart.series.getAt(0);
@@ -43,10 +44,13 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
                 beforerefresh: this.beforerefresh
             },
 			
-			
             'FornitureGrid dataview': {
                 itemdblclick: this.modificaFornitura
             },
+			'FornitureGrid': {
+        		selectionchange: this.gridSelectionChange,
+                viewready: this.onViewReady
+			},
             'FornitureGrid button[action=add]': {
             	click: this.modificaFornitura
             },
@@ -79,6 +83,8 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 	resetcercaFornitura: function(button) {
 			var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
 			var store = grid.getStore();
+			Ext.getCmp("searchvalue").reset();
+			Ext.getCmp("searchfield").reset();
 			store.clearFilter(true);
 			store.getProxy().extraParams.task = 'LISTING';
 	},
@@ -175,5 +181,16 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
                 }, 900);
             }
         };
-    }	
+    },
+
+    gridSelectionChange: function(model, records) {
+        if (records[0]) {
+             this.getScheda().getForm().loadRecord(records[0]);
+        }
+    },
+    
+    onViewReady: function(grid) {
+        grid.getSelectionModel().select(0);
+    }   
+	
 });
