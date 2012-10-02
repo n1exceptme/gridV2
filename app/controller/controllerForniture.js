@@ -87,10 +87,13 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
 			var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
 			var store = grid.getStore();
 			store.clearFilter(true);
+			store.loadPage(1);
 			var searchValue = Ext.getCmp("searchvalue").getValue();
 			var searchField = Ext.getCmp("searchfield").getValue();
 			store.getProxy().extraParams.task = 'SEARCH';
-			store.load().filter(searchField, searchValue);
+			store.filter(searchField, searchValue);
+			store.loadPage(1);
+			grid.getView().refresh();
 	},
     
     aggiornaFornitura: function(button) {
@@ -132,7 +135,7 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
     },
 	
 	localizzaFornitura: function(button) {
-		var mapwin;
+/* 		var mapwin;
 		if (!mapwin) {
 			mapwin = Ext.create('Ext.window.Window', {
                 autoShow: true,
@@ -152,7 +155,7 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
                     }
                 }
             });
-		}
+		} */
     },
 	
     beforerefresh: function() {

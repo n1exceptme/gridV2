@@ -132,7 +132,7 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 					'codice_cliente': 'Abraham',
 					'particella' : 'Via',
 					'toponimo': 'Nuova delle Brecce',
-					'comune'  : '80147 Napoli',
+					'comune'  : 'Napoli',
 					'ncivico'  : '38',
 					'prov'  : 'NA',
 					'valore_tensione'    : 7,
@@ -201,7 +201,7 @@ Ext.define('ExtPOD.view.fornitura.Scheda', {
 						xtype: 'gmappanel',
 						center: {
 							geoCodeAddr: indirizzo,
-							marker: {title: 'Sede Citelum'}
+							marker: {title: 'Sede Citelum'+ + indirizzo}
 						}
 					}
 				});

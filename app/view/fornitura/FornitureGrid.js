@@ -229,7 +229,18 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 				style: {
 					borderColor: 'gray'
 					},
-				action: 'cerca'
+				//action: 'cerca'
+				handler: function(){
+					var grid = Ext.ComponentQuery.query('FornitureGrid')[0];
+					var store = grid.getStore();
+					store.clearFilter(true);
+					var searchValue = Ext.getCmp("searchvalue").getValue();
+					var searchField = Ext.getCmp("searchfield").getValue();
+					store.getProxy().extraParams.task = 'SEARCH';
+					store.filter(searchField, searchValue);
+					store.loadPage(1);
+					grid.getView().refresh();
+				}
 				},'-',
 				{
                 iconCls: 'icon-search',
