@@ -5,8 +5,8 @@
 Ext.define('ExtPOD.store.Forniture', {
     extend: 'Ext.data.Store',
     model: 'ExtPOD.model.Fornitura',
-    pageSize: 20,
-    autoLoad: {start: 0, limit: 20},
+    pageSize: 30,
+    autoLoad: {start: 0, limit: 30},
 	remoteSort:true,
 	simpleSortMode:true,
     sorters : {
@@ -14,17 +14,17 @@ Ext.define('ExtPOD.store.Forniture', {
         direction : 'ASC'
     },
 
-	remoteFilter: true,
+/* 	remoteFilter: true,
 	//Parameter name to send filtering information in
      filters: [{
-		property: 'pod',
+		property: '',
         value: '' 
     }],
 
 	// The PHP script just use query=<whatever>
 	encodeFilters: function(filters) {
 		return filters[0].value;
-	},			
+	},		 */	
 	
     proxy: {
         type: 'ajax',
@@ -34,9 +34,9 @@ Ext.define('ExtPOD.store.Forniture', {
             update: 'php/aggiornaFornitura.php',
             destroy: 'php/eliminaFornitura.php'
         },
- 		extraParams:{
+/*  		extraParams:{
 			task: "LISTING"
-		},
+		}, */
         reader: {
             type: 'json',
             root: 'forniture',

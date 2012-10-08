@@ -1,7 +1,8 @@
 Ext.define('ExtPOD.view.chart.ConsumiBar', {
 	extend: 'Ext.chart.Chart',
     alias : 'widget.ConsumiBar',
-
+	id: 'GraficiRiassuntivi',
+	
 	flex: 1,
     shadow: true,
 	

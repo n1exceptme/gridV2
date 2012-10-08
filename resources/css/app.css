@@ -38,10 +38,22 @@
     background-image: url(../images/chart_bar.png) !important;
 }
 
+.icon-chart {
+    background-image: url(../images/linechart2.png) !important;
+}
+
 .icon-maps {
     background-image: url(../images/maps.png) !important;
 }
 
 .icon-scheda {
     background-image: url(../images/info.png) !important;
+}
+
+.icon-resetSearch{
+    background-image: url(../images/reset.png) !important;
+}
+
+.icon-consumi{
+    background-image: url(../images/consumi.png) !important;
 }

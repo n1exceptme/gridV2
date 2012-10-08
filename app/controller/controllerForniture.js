@@ -1,13 +1,23 @@
+Ext.MessageBox = Ext.Msg = Ext.create('Ext.window.MessageBox', {
+    buttonText: {
+        ok     : 'OK',
+        yes    : 'Sì',
+        no     : 'No',
+        cancel : 'Annulla'
+    }
+});
+
 Ext.define('ExtPOD.controller.ControllerForniture', {
     extend: 'Ext.app.Controller',
 
-    stores: ['Forniture'],
+    stores: ['Forniture','Consumi'],
 
-    models: ['Fornitura'],
+    models: ['Fornitura','Consumo'],
 
     views: [
 		'fornitura.EditForm', 
-		'fornitura.FornitureGrid', 
+		'fornitura.FornitureGrid',
+		'consumi.ConsumiGrid',
 		'fornitura.Scheda',
 		'chart.ConsumiBar'
 		],
@@ -59,7 +69,10 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
             },			
             'FornitureGrid button[action=delete]': {
                 click: this.eliminaFornitura
-            },
+            }, 
+            'FornitureGrid button[action=showchart]': {
+                toggle: this.mostraGrafico
+            },			
             'FornitureGrid button[action=cerca]': {
                 click: this.cercaFornitura
             },	
@@ -132,12 +145,18 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
     	var grid = this.getFornitureGrid(),
     	record = grid.getSelectionModel().getSelection(), 
         store = this.getFornitureStore();
-
-	    store.remove(record);
-	    this.getFornitureStore().sync();
-
-        //faz reload para atualziar
-        this.getFornitureStore().load();
+		
+		Ext.Msg.confirm('Attenzione!', 'Eliminare la fornitura?', function(button) {
+			if (button === 'yes') {
+				Ext.Msg.alert('Conferma', 'POD eliminato dal database.');
+				store.remove(record);
+				store.sync();
+				store.load();
+			} else {
+				store.sync();
+			}
+		});
+	
     },
 	
 	localizzaFornitura: function(button) {
@@ -187,6 +206,16 @@ Ext.define('ExtPOD.controller.ControllerForniture', {
         if (records[0]) {
              this.getScheda().getForm().loadRecord(records[0]);
         }
+    },
+	
+	mostraGrafico: function(button, pressed) {
+		if (pressed) {
+        Ext.getCmp('chartpanel').show();
+		button.setText('Nascondi Grafici');
+		} else {
+		button.setText('Mostra Grafici');
+		Ext.getCmp('chartpanel').hide();
+		}
     },
     
     onViewReady: function(grid) {

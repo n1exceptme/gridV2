@@ -41,7 +41,6 @@
 			$queryString = "SELECT * FROM anagrafica3 
 						ORDER BY $sortField $sortOrder 
 						LIMIT $start,  $limit";
-							
 		break;
 		
 		case "SEARCH":
@@ -50,7 +49,7 @@
 		break;
 		
 		default:
-			$queryString = "SELECT * FROM anagrafica3 LIMIT $start,  $limit";
+			$queryString = "SELECT * FROM anagrafica3 ORDER BY $sortField $sortOrder LIMIT $start,  $limit";
 		break;
 	}
 
@@ -69,9 +68,15 @@
 	$total = $row['num'];
 
 	//codifica i dati in formato JSON
+	
 	echo json_encode(array(
 		"success" => mysql_errno() == 0,
 		"total" => $total,
 		"forniture" => $forniture
 	));
+	
+	$info = date('Y-m-d H:i:s', time()) . " - " . $queryString . "\n";
+	$log = fopen ('LOG.log', 'a') or die("can't open file");
+	fwrite($log, $info );
+	fclose($log);
 ?>

@@ -1,19 +1,23 @@
-var sm = Ext.create('Ext.selection.CheckboxModel');
+//var sm = Ext.create('Ext.selection.CheckboxModel');
 
 Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
-    extend: 'Ext.grid.Panel',
+    extend: 'Ext.ux.LiveFilterGridPanel',
     alias : 'widget.FornitureGrid',
     
-	selModel: sm,
+	//selModel: sm,
 	
     requires: [
 		'Ext.toolbar.Paging',
-		'Ext.ux.PagingToolbarResizer'
+		'Ext.ux.PagingToolbarResizer',
+		'Ext.ux.LiveSearchGridPanel'
 	],
     
-	columnLines: true,
+	verticalScrollerType: 'paginggridscroller',
+	invalidateScrollerOnRefresh: false,	
 	
-    iconCls: 'icon-grid',
+	indexes:['pod','codice_cliente','toponimo'],
+	
+	columnLines: true,
 
     title : 'Forniture',
     store: 'Forniture',
@@ -75,7 +79,7 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 						columns: [
 									{text: 'Part.', dataIndex: 'particella',  sortable: true, width: 70}, 
 									{text: 'Toponimo', dataIndex: 'toponimo', sortable: true, width:150},
-									{text: 'N.', dataIndex: 'ncivico', sortable: false, width:40, align:'center'},
+									{text: 'N.', dataIndex: 'ncivico', sortable: false, width:50, align:'center'},
 									{text: 'Comune', dataIndex: 'comune', sortable: true, align:'center', width:60, locked: true},
 									{text: 'Prov', dataIndex: 'prov', align:'center', sortable: true, hidden: true, width:35}
 						]
@@ -185,24 +189,31 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
                 text: 'Modifica',
 				width: 70,
 				border: 1,
-				style: {
-					borderColor: 'gray'
-					},				
+				style: { borderColor: 'gray' },				
                 action: 'edit'
 				},' ',
 				{
                 iconCls: 'icon-delete',
                 text: 'Elimina',
-                action: 'delete',
-				width: 70,
+                width: 70,
+				border: 1,
+				style: { borderColor: 'gray'},
+				action: 'delete'
+				},'->',
+				{
+                iconCls: 'icon-grafico',
+                text: 'Mostra Grafici',
+                width: 110,
+				enableToggle: true,
 				border: 1,
 				style: {
 					borderColor: 'gray'
-					},				
-				}
+					},
+				action: 'showchart'
+				}				
 			]
 			},
-			{
+/* 			{
             xtype: 'toolbar',
             items: [			
 				{
@@ -254,7 +265,7 @@ Ext.define('ExtPOD.view.fornitura.FornitureGrid' ,{
 				action: 'resetsearch'
 				}     				
 				]
-			},
+			}, */
 			{
 			xtype: 'pagingtoolbar',
 			dock:'bottom',

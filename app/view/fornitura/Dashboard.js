@@ -4,6 +4,7 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
 
 	requires: [
         'ExtPOD.view.fornitura.FornitureGrid',
+		'ExtPOD.view.consumi.ConsumiGrid',
 		'ExtPOD.view.fornitura.Scheda',
 		'ExtPOD.view.chart.ConsumiBar'
 	],
@@ -12,7 +13,7 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
     frame: true,
     bodyPadding: 5,
     //width: 870,
-    //height: 720,
+    //height: 1200,
 
     fieldDefaults: {
         labelAlign: 'left',
@@ -26,32 +27,70 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
     
     items: [
         {
-        
-        layout: {type: 'border', align: 'stretch'},
+        layout: {type: 'border', align: 'default'},
         flex: 3,
+		height: 500,
         border: false,
         bodyStyle: 'background-color: transparent',
         
         items: [
 			{
-			region: 'center',
-        	xtype: 'FornitureGrid'
-			}, 
+            xtype:'tabpanel',
+            activeItem:0,
+			height: 400,
+			split: true,
+			autoScroll:true,
+			region: 'center',			
+            items: [		
+					{
+					title:'Anagrafica',
+					id:'anagraficatab',
+					iconCls: 'icon-grid',
+					layout: 'fit',
+					xtype: 'FornitureGrid'
+					},
+					{
+					title:'Consumi',
+					id:'consumitab',
+					iconCls:'icon-consumi',
+					xtype: 'ConsumiGrid'
+					}
+					]
+			},
 			{
+            xtype:'Scheda',
+			iconCls: 'icon-scheda',
+			bodyStyle:'padding:10px',
 			width: 400,
 			split: true,
-			region: 'east',
-            xtype: 'Scheda'
-			}
+			autoScroll:true,
+			region: 'east'
+			}		
 		]
         },
-		{
+		{	
+			xtype: 'tabpanel',
+            activeTab: 0,
+            defaults:{
+                bodyStyle:'padding:10px'
+            },			
+			title: 'Grafici Riassuntivi',
+			iconCls: 'icon-chart',
 			split: true,
 			height: 300,
-			collapsible: true,
+			hidden: true,
+			id: 'chartpanel',
 			layout: 'fit',
 			margin: '5 0 0 0',
-			items: [{ xtype: 'ConsumiBar'}]
+			items: [
+					{
+					title: 'Potenza',
+					xtype: 'ConsumiBar'
+					},
+					{
+					title: 'Consumi'
+					}				
+					]
 		}	
 	]
 });

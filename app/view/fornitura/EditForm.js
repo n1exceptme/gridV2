@@ -117,7 +117,10 @@ Ext.define('ExtPOD.view.fornitura.EditForm', {
                     {
                         xtype: 'numberfield',
                         name : 'potenza',
-                        fieldLabel: 'Potenza'
+                        fieldLabel: 'Potenza',
+						allowDecimals: true,
+						decimalPrecision: 1,
+						step: 0.1						
                     }
                 ]
             }
