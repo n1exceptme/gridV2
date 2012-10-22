@@ -54,6 +54,12 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
 					id:'consumitab',
 					iconCls:'icon-consumi',
 					xtype: 'ConsumiGrid'
+					},
+					{
+					title:'Volturazioni',
+					id:'volturazionitab',
+					iconCls:'icon-volture',
+					xtype: 'VoltureGrid'
 					}
 					]
 			},
@@ -88,7 +94,8 @@ Ext.define('ExtPOD.view.fornitura.Dashboard', {
 					xtype: 'ConsumiBar'
 					},
 					{
-					title: 'Consumi'
+					title: 'Consumi',
+					xtype: 'ConsumiLine'
 					}				
 					]
 		}	
